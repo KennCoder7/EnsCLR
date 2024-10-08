@@ -1,0 +1,63 @@
+work_dir: SklCLR/PARTSCLR/output/ensemble_aimclr/ensemble_aimclr_single_pro_plus/joint_xsub_le_joint1
+weights: SklCLR/PARTSCLR/output/ensemble_aimclr/ensemble_aimclr_single_pro_plus/joint_xsub/epoch300_model.pt
+ignore_weights: [encoder_q.fc, encoder_q_alpha.fc, encoder_q_beta.fc, encoder_q_gamma.fc,
+                 encoder_k, encoder_k_alpha, encoder_k_beta, encoder_k_gamma,
+                 queue, queue_alpha, queue_beta, queue_gamma]
+
+# feeder
+train_feeder: feeder.ntu_feeder.Feeder_single
+train_feeder_args:
+  data_path: ../datasets/NTU/NTU-RGB-D/NTU60_frame50/xsub/train_position.npy
+  label_path: ../datasets/NTU/NTU-RGB-D/xsub/train_label.pkl
+  shear_amplitude: -1
+  temperal_padding_ratio: -1
+  random_rot_theta: -1
+  mmap: True
+test_feeder: feeder.ntu_feeder.Feeder_single
+test_feeder_args:
+  data_path: ../datasets/NTU/NTU-RGB-D/NTU60_frame50/xsub/val_position.npy
+  label_path: ../datasets/NTU/NTU-RGB-D/xsub/val_label.pkl
+  shear_amplitude: -1
+  temperal_padding_ratio: -1
+  random_rot_theta: -1
+  mmap: True
+
+# model
+model: net.ensemble_aimclr_single_pro_plus.CLR
+model_args:
+  base_encoder: net.st_gcn.STGCNModel
+  pretrain: False
+  # feature_dim: 128
+  # queue_size: 32768
+  # momentum: 0.999
+  # Temperature: 0.07
+  # mlp: True
+  in_channels: 3
+  hidden_channels: 16
+  hidden_dim: 256
+  num_class: 60
+  dropout: 0.5
+  graph_args:
+    layout: 'ntu-rgb+d'
+    strategy: 'spatial'
+  edge_importance_weighting: True
+
+# optim
+nesterov: False
+weight_decay: 0.0
+base_lr: 3.
+optimizer: SGD
+step: [80]
+
+# training
+device: [0]
+batch_size: 128
+test_batch_size: 128
+num_epoch: 100
+view: 'alpha'
+single_name: 'joint'
+
+# log
+save_interval: -1
+eval_interval: 5
+save_result: True

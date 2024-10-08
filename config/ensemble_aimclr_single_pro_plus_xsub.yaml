@@ -1,0 +1,56 @@
+work_dir: SklCLR/PARTSCLR/output/ensemble_aimclr/ensemble_aimclr_single_pro_plus/joint_xsub
+
+# feeder
+train_feeder: feeder.ntu_feeder.Feeder_triple_pro
+train_feeder_args:
+  data_path: ../datasets/NTU/NTU-RGB-D/NTU60_frame50/xsub/train_position.npy
+  label_path: ../datasets/NTU/NTU-RGB-D/xsub/train_label.pkl
+  shear_amplitude: 0.5
+  temperal_padding_ratio: 6
+  mmap: True
+
+# model
+model: net.ensemble_aimclr_single_pro_plus.CLR
+model_args:
+  base_encoder: net.st_gcn.STGCNModel
+  pretrain: True
+  feature_dim: 128
+  queue_size: 32768
+  momentum: 0.999
+  Temperature: 0.07
+  mlp: True
+  in_channels: 3
+  hidden_channels: 16 # 1/4 x channels of standard stgcn
+#  hidden_channels: 64
+  hidden_dim: 256
+  num_class: 60
+  dropout: 0.5
+  graph_args:
+    layout: 'ntu-rgb+d'
+    strategy: 'spatial'
+  edge_importance_weighting: True
+
+# optim
+nesterov: False
+weight_decay: 1e-4
+base_lr: 0.1
+optimizer: SGD
+step: [250]
+
+# training
+device: [0]
+batch_size: 128
+test_batch_size: 128
+num_epoch: 300
+start_epoch: 0
+
+topk: 1
+view: 'joint'
+mining_epoch: 150
+context: True
+cross: False
+ensemble: True
+
+# log
+save_interval: 5
+eval_interval: -1
