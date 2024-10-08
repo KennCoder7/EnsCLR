@@ -1,6 +1,8 @@
 # EnsCLR
 This is an official PyTorch implementation of "EnsCLR: Unsupervised skeleton-based action recognition via ensemble contrastive learning of representation" in CVIU.
 
+![The framework of EnsCLR.](https://github.com/KennCoder7/EnsCLR/blob/main/weights/framework.png)
+
 @article{wang2024ensclr,  
   title={EnsCLR: Unsupervised skeleton-based action recognition via ensemble contrastive learning of representation},  
   author={Wang, Kun and Cao, Jiuxin and Cao, Biwei and Liu, Bo},  
