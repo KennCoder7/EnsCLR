@@ -7,7 +7,7 @@ This is an official PyTorch implementation of "EnsCLR: Unsupervised skeleton-bas
 The data preparation is on the basis of [AimCLR](https://github.com/Levigty/AimCLR?tab=readme-ov-file).
 
 ## Citation
-We propose a ensemble contrastive learning framework for unsupervised representation learning, named EnsCLR, where they aggregate the information from multiple pipelines to mining the robust nearest neighbors used for the pseudo positive pairs.
+We propose a ensemble contrastive learning framework for unsupervised representation learning, named EnsCLR.
 
 ```
 @article{wang2024ensclr,  
