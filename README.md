@@ -3,6 +3,9 @@ This is an official PyTorch implementation of "EnsCLR: Unsupervised skeleton-bas
 
 ![The framework of EnsCLR.](https://github.com/KennCoder7/EnsCLR/blob/main/weights/framework.png)
 
+## Data Preparation
+The data preparation is on the basis of [AimCLR](https://github.com/Levigty/AimCLR?tab=readme-ov-file).
+
 @article{wang2024ensclr,  
   title={EnsCLR: Unsupervised skeleton-based action recognition via ensemble contrastive learning of representation},  
   author={Wang, Kun and Cao, Jiuxin and Cao, Biwei and Liu, Bo},  
